@@ -1,7 +1,5 @@
 # Data Warehouse - AirAsia Flight Ticket Booking System
 
-# AirAsia Flight Ticket Booking System Data Warehouse
-
 This repository contains documentation for a data warehouse implementation for AirAsia's flight ticket booking system. The project includes both relational (IBM DB2) and NoSQL (MongoDB) database approaches as demonstrated in the assignment reports.
 
 ## Project Overview

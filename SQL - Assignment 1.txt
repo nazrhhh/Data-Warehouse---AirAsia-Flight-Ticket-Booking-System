@@ -1,0 +1,193 @@
+CREATE TABLE Customer(
+Cust_id int NOT NULL PRIMARY KEY,
+Cust_name varchar(100),
+Cust_age int,
+Cust_passport varchar(25),
+Cust_gender char(20),
+Cust_contactnum varchar(20),
+Cust_email varchar(30)
+);
+
+CREATE TABLE Location(
+Loc_id char(3) NOT NULL PRIMARY KEY,
+Loc_country char(50),
+Loc_state char(50),
+Loc_city char(50)
+);
+
+
+CREATE TABLE Company(
+Company_id char(3) NOT NULL PRIMARY KEY,
+Company_name char(100),
+Company_loc char(50),
+Company_email varchar(50),
+Company_contactnum varchar(50),
+Company_rating decimal(2,1)
+);
+
+CREATE TABLE Promotion (
+Promo_code varchar(20) NOT NULL PRIMARY KEY,
+Promo_desc varchar(100),
+Promo_disc decimal(3,1),
+Promo_start date,
+Promo_end date
+);
+
+CREATE TABLE Payment (
+Payment_id bigint NOT NULL PRIMARY KEY,
+Payment_method varchar(50)
+);
+
+
+CREATE TABLE Flight (
+Flight_no varchar(20) NOT NULL PRIMARY KEY,
+Flight_origin char(50),
+Flight_destination char(50),
+Flight_departdate date,
+Flight_departtime time,
+Flight_arrivaldate date,
+Flight_arrivaltime time
+);
+
+CREATE TABLE Time (
+Time_id bigint NOT NULL PRIMARY KEY,
+Time_quarter int,
+Time_month char(20),
+Time_day char(20),
+Time_date date
+);
+
+
+CREATE TABLE Sales (
+Sales_id varchar(10) NOT NULL PRIMARY KEY,
+Cust_id int,
+Loc_id char(3),
+Time_id bigint,
+Company_id char(3),
+Promo_code varchar(20),
+Payment_id bigint,
+Flight_no varchar(20),
+Sale_total float,
+
+FOREIGN KEY (Cust_id) REFERENCES Customer,
+FOREIGN KEY (Loc_id) REFERENCES Location,
+FOREIGN KEY (Time_id) REFERENCES Time,
+FOREIGN KEY (Company_id) REFERENCES Company,
+FOREIGN KEY (Promo_code) REFERENCES Promotion,
+FOREIGN KEY (Payment_id) REFERENCES Payment,
+FOREIGN KEY (Flight_no) REFERENCES Flight
+);
+
+INSERT INTO Customer VALUES
+(10077, 'Emily Smith', 25, 'AB123456', 'FEMALE', '+15551234567', 'emilysm@gmail.com'),
+(20012,	'Aminah Azman', 30, 'XY987654',	'FEMALE', '+60134568923', 'aminahaaa@gmail.com'),
+(30456,	'Aiman Arif', 42, 'PQ456789', 'MALE', '+60142345678', 'aimanarf@gmail.com'),
+(40123,	'Jennifer Lee', 19, 'CD789012',	'FEMALE', '+60137777456', 'jenniferlee@yahoo.com'),
+(50234,	'Daniel Iman', 36, 'EF234567', 'MALE', '+60115968275', 'daniell@gmail.com'),
+(60567,	'Kumar Singh', 50, 'GH345678', 'MALE', '+60122323979', 'kumarsk@yahoo.com'),
+(70897,	'Lee Soon Ye', 28, 'LJ391728', 'MALE', '+442012322678', 'soonye@gmail.com'),
+(77239,	'Ahmad Ali', 44, 'ND827631', 'MALE', '+60145955657', 'ahmadali@gmail.com'),
+(90567,	'Sophia Adam', 22, 'ST398734', 'FEMALE', '+6121345678', 'sophiadm@gmail.com'),
+(11384,	'Wan Seri', 53, 'AP493789', 'FEMALE', '+60138955789', 'wanseri@gmail.com');
+
+INSERT INTO Location VALUES
+('BNE',	'Australia', 'Brisbane', 'Brisbane'),
+('KUL',	'Malaysia', 'Kuala Lumpur', 'Kuala Lumpur'),
+('DPS',	'Indonesia', 'Denpasar', 'Bali'),
+('MNL',	'Philippines', 'Manila', 'Manila'),
+('SYD',	'Australia', 'Sydney', 'Sydney'),
+('KIX',	'Japan', 'Osaka', 'Osaka'),
+('TPE',	'Taiwan', 'Taipei', 'Taipei'),
+('SIN',	'Singapore', 'Singapore', 'Singapore'),
+('ICN',	'South Korea', 'Seoul',	'Incheon'),
+('BWN',	'Brunei', 'Brunei', 'Bandar Seri Begawan');
+
+INSERT INTO Company VALUES
+('AXM',	'AirAsia', 'Kuala Lumpur', 'maa_groupdesk@airasia.com', '+60378411818', 3.1),
+('KTC',	'AirAsia Cambodia', 'Phnom Penh', 'taa_pnhgrp@airasia.com', '+855236329979', 3.1),
+('IAD',	'AirAsia India', 'Chennai', 'in_groupdesk@airasia.com', '+918048101460', 2.5),
+('WAJ',	'AirAsia Japan', 'Nagoya', 'japan_groupdesk@airasia.com', '+815068648183', 3.1),
+('XAX',	'AirAsia X', 'Australia', 'aax_groupdesk@airasia.com', '+61238138388', 3.5),
+('AWQ',	'AirAsia Indonesia','Jakarta', 'iaa_groupdesk@airasia.com', '+622129850850', 3.5),
+('EZD',	'AirAsia Zest',	'Manila', 'aaz_groupdesk@airasia.com', '+60386600008', 3.1),
+('APG',	'AirAsia Philippines',	'Manila', 'paa_groupdesk@airasia.com', '+60263247715', 3.1),
+('AIQ',	'AirAsia Thai',	'Bangkok', 'taa_groupdesk@airasia.com', '+6620297862', 3.1),
+('TAX',	'AirAsia Thai X', 'Bangkok', 'taax_groupdesk@airasia.com', '+6625159888', 3.5);
+
+INSERT INTO Promotion VALUES
+('WELCOME10', 'Get 10% OFF', 10.0, '2024-04-01', '2024-07-31'),
+('WELCOMEAPP', 'Get 20% OFF', 20.0, '2024-01-01', '2024-09-01'),
+('LOWFARE', 'Get 5% OFF', 5.00,	'2024-03-01', '2024-06-29'),
+('MAYDEAL', 'Get 30% OFF', 30.0, '2024-03-01', '2024-05-31'),
+('RAHMAH50', 'Get 50% OFF', 50.0, '2024-05-01', '2024-06-30'),
+('BIGPAY5', 'Get 5% OFF', 5.00,	'2024-06-01', '2024-07-31'),
+('HOLIDAY', 'Get 60% OFF', 60.0, '2024-03-01', '2024-05-31'),
+('WELCOME20', 'Get 20% OFF', 20.0, '2024-05-01', '2024-07-30'),
+('SNAP', 'Get 40% OFF',	40.0, '2023-10-01', '2024-06-01'),
+('FLYSISWA', 'Get 70% OFF', 70.0, '2024-01-01', '2024-12-31');
+
+INSERT INTO Flight VALUES 
+('AK123', 'KUL', 'DPS', '2024-07-15', '19:45:00', '2024-07-15', '22:45:00'),
+('QZ456', 'BNE', 'KUL', '2024-09-03', '07:00:00', '2024-09-04', '04:15:00'),
+('FD789', 'BWN', 'KUL', '2024-05-28', '16:10:00', '2024-05-28', '18:35:00'),
+('XT234', 'KUL', 'MNL', '2024-10-10', '08:00:00', '2024-10-10', '12:15:00'),
+('Z2567', 'ICN', 'KUL', '2024-06-20', '18:45:00', '2024-06-21', '00:15:00'),
+('PQ890', 'KUL', 'KIX', '2024-08-12', '01:55:00', '2024-08-12', '09:35:00'),
+('BB112', 'KUL', 'TPE', '2024-11-05', '09:50:00', '2024-11-05', '14:40:00'),
+('CC334', 'KUL', 'SIN', '2024-04-17', '06:05:00', '2024-04-17', '07:15:00'),
+('EE556', 'KUL', 'ICN', '2024-12-22', '23:00:00', '2024-12-23', '06:30:00'),
+('WW778', 'SYD', 'KUL', '2024-03-08', '11:15:00', '2024-03-09', '00:05:00');
+
+
+INSERT INTO Payment VALUES 
+(1234567890, 'Credit Card'),
+(9876543210, 'Online Banking'),
+(5678901234, 'Debit Card'),
+(2345678901, 'Debit Card'),
+(8765432109, 'BigPay'),
+(3456789012, 'BigPay'),
+(9012345678, 'BigPay'),
+(7890123456, 'Credit Card'),
+(2109876543, 'Online Banking'),
+(6543210987, 'Debit Card');
+
+INSERT INTO Time VALUES 
+(1679802000, 2, 'April', 'Saturday', '2024-04-20'),
+(1697758800, 2, 'May', 'Saturday', '2024-05-11'),
+(1684218000, 1, 'January', 'Tuesday', '2024-01-02'),
+(1698997200, 2, 'June',  'Sunday', '2024-06-30'),
+(1692656400, 1, 'March', 'Monday', '2024-03-18'),
+(1696890000, 1, 'March', 'Thursday', '2024-03-07'),
+(1690947600, 2, 'June', 'Tuesday', '2024-06-25'),
+(1694910800, 4, 'December', 'Friday', '2023-12-23'),
+(1689541200, 3, 'July', 'Tuesday', '2024-07-09'),
+(1681664400, 4, 'November', 'Wednesday', '2023-11-29');
+
+INSERT INTO Sales VALUES 
+('AB123456', 10077, 'KUL', 1679802000, 'AWQ', 'WELCOME10', 1234567890, 'AK123', 329.00),
+('CD789012', 20012, 'BNE', 1697758800, 'XAX', 'LOWFARE', 9876543210, 'QZ456', 1524.00),
+('EF345678', 30456, 'BWN', 1684218000, 'AXM', 'WELCOMEAPP', 5678901234, 'FD789', 1435.00),
+('GH901234', 40123, 'KUL', 1698997200, 'APG', 'FLYSISWA', 2345678901, 'XT234', 422.00),
+('IJ567890', 50234, 'ICN', 1692656400, 'KTC', 'RAHMAH50', 8765432109, 'Z2567', 522.00),
+('KL123456', 60567, 'KUL', 1696890000, 'WAJ', 'RAHMAH50', 3456789012, 'PQ890', 923.00),
+('MN789012', 70897, 'KUL', 1690947600, 'TAX', 'BIGPAY5', 9012345678, 'BB112', 415.00),
+('OP345678', 77239, 'KUL', 1694910800, 'AXM', 'SNAP', 7890123456, 'CC334', 200.00),
+('QR901234', 90567, 'KUL', 1689541200, 'AXM', 'WELCOME20', 2109876543, 'EE556', 850.00),
+('ST567890', 11384, 'SYD', 1681664400, 'XAX', 'SNAP', 6543210987, 'WW778', 1825.00);
+
+CREATE PROCEDURE afterDiscount(PromoCode VARCHAR(20))
+LANGUAGE SQL
+BEGIN
+    UPDATE Sales s
+    SET Sale_total = Sale_total - (
+        SELECT SUM(s.Sale_total * pd.Promo_disc / 100)
+        FROM Promotion pd
+        WHERE pd.Promo_code = s.Promo_code
+        AND pd.Promo_code = PromoCode)
+    WHERE s.Promo_code = PromoCode;
+END
+
+CALL afterDiscount('RAHMAH50');
+
+SELECT * FROM Sales;
+
